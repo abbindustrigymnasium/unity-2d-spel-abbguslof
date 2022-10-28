@@ -2,13 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootCanon : MonoBehaviour
+public class Canon : MonoBehaviour
 {
     private Camera camera;
     private Vector2 mousePos;
     private Vector2 playerPos;
     public int Clamp1 = -30;
     public int Clamp2 = 10;
+    [SerializeField] private Transform pfBullet;
+    [SerializeField] private Transform MuzzleEnd;
+    [SerializeField] private Transform Muzzle;
+
+    void Awake()
+    {
+    }
 
     void Start()
     {
@@ -18,6 +25,9 @@ public class ShootCanon : MonoBehaviour
     void Update()
     {
         RotateCanon();
+
+        if (Input.GetMouseButtonDown(0))
+            ShootCanon();
     }
 
     float CalcAngle(float X, float Y, float X1, float Y1)
@@ -38,6 +48,9 @@ public class ShootCanon : MonoBehaviour
 
     void ShootCanon()
     {
-        
+        Transform CanonBallTransform = Instantiate(pfBullet, MuzzleEnd.position, Quaternion.identity);
+
+        Vector3 ShootDir = (CanonBallTransform.position - Muzzle.position).normalized;
+        CanonBallTransform.GetComponent<CanonBall>().Setup(ShootDir);
     }
 }

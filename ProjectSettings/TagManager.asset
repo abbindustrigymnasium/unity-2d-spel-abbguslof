@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Canon
+  - Boat
+  - CanonBall
+  - SinkShip
   layers:
   - Default
   - TransparentFX
